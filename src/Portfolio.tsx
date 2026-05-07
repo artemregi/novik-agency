@@ -36,7 +36,7 @@ function Card({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
       transition={{ duration: 0.7, delay: 0.2 + i * 0.12, ease: EASE }}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      className="block rounded-2xl p-7 md:p-9"
+      className="block rounded-2xl p-5 md:p-9"
       style={{
         background: hov ? `rgba(${p.accentRgb},0.07)` : 'rgba(255,255,255,0.03)',
         border: `1px solid ${hov ? `rgba(${p.accentRgb},0.25)` : 'rgba(255,255,255,0.07)'}`,
@@ -96,9 +96,9 @@ export default function Portfolio() {
 
         <Nav />
 
-        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 md:px-16 py-32">
+        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-5 md:px-16 py-28">
 
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-2xl px-2">
             {/* Heading */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}

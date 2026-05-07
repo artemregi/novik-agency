@@ -22,46 +22,120 @@ export function openTelegram(msg = '') {
 /* ── Nav ──────────────────────────────────────────────────── */
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
+  // lock body scroll when menu open
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-10 md:px-20 py-7 transition-all duration-500"
-      style={{
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        background: scrolled ? 'rgba(5,5,5,0.72)' : 'transparent',
-      }}
-    >
-      <Link to="/" className="font-serif text-white/85 text-sm font-light tracking-[0.15em] uppercase hover:text-white transition-colors duration-300">
-        Novik_agency
-      </Link>
-
-      <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-10">
-        {[{ to: '/portfolio', label: 'Портфолио' }, { to: '/price', label: 'Цены' }].map(({ to, label }) => (
-          <Link key={to} to={to} className="nav-link label-caps text-white/50 hover:text-white transition-colors duration-300">
-            {label}
-          </Link>
-        ))}
-      </div>
-
-      <button
-        onClick={() => openTelegram()}
-        className="group label-caps text-white/65 hover:text-white flex items-center gap-2 transition-colors duration-300"
+    <>
+      <motion.nav
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-16 py-6 transition-all duration-500"
+        style={{
+          backdropFilter: scrolled || open ? 'blur(20px)' : 'none',
+          background: scrolled || open ? 'rgba(5,5,5,0.82)' : 'transparent',
+        }}
       >
-        <span className="relative overflow-hidden inline-flex h-[1em]">
-          <span className="transition-transform duration-300 group-hover:-translate-y-full inline-block">Написать</span>
-          <span className="absolute top-full left-0 transition-transform duration-300 group-hover:-translate-y-full inline-block">Написать</span>
-        </span>
-        <ArrowUpRight size={11} />
-      </button>
-    </motion.nav>
+        <Link
+          to="/"
+          onClick={() => setOpen(false)}
+          className="font-serif text-white/85 text-sm font-light tracking-[0.15em] uppercase hover:text-white transition-colors duration-300"
+        >
+          Novik_agency
+        </Link>
+
+        {/* Desktop center links */}
+        <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-10">
+          {[{ to: '/portfolio', label: 'Портфолио' }, { to: '/price', label: 'Цены' }].map(({ to, label }) => (
+            <Link key={to} to={to} className="nav-link label-caps text-white/50 hover:text-white transition-colors duration-300">
+              {label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Desktop CTA */}
+        <button
+          onClick={() => openTelegram()}
+          className="hidden md:flex group label-caps text-white/65 hover:text-white items-center gap-2 transition-colors duration-300"
+        >
+          <span className="relative overflow-hidden inline-flex h-[1em]">
+            <span className="transition-transform duration-300 group-hover:-translate-y-full inline-block">Написать</span>
+            <span className="absolute top-full left-0 transition-transform duration-300 group-hover:-translate-y-full inline-block">Написать</span>
+          </span>
+          <ArrowUpRight size={11} />
+        </button>
+
+        {/* Mobile burger */}
+        <button
+          onClick={() => setOpen(v => !v)}
+          className="md:hidden flex flex-col justify-center items-center gap-[5px] w-8 h-8"
+          aria-label="Меню"
+        >
+          <span className="block w-5 h-px bg-white/70 transition-all duration-300"
+            style={{ transform: open ? 'translateY(6px) rotate(45deg)' : 'none' }} />
+          <span className="block w-5 h-px bg-white/70 transition-all duration-300"
+            style={{ opacity: open ? 0 : 1 }} />
+          <span className="block w-5 h-px bg-white/70 transition-all duration-300"
+            style={{ transform: open ? 'translateY(-6px) rotate(-45deg)' : 'none' }} />
+        </button>
+      </motion.nav>
+
+      {/* Mobile fullscreen menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 md:hidden"
+            style={{ background: 'rgba(5,5,5,0.97)', backdropFilter: 'blur(20px)' }}
+          >
+            {[{ to: '/portfolio', label: 'Портфолио' }, { to: '/price', label: 'Цены' }].map(({ to, label }, i) => (
+              <motion.div
+                key={to}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08, duration: 0.4, ease: EASE }}
+              >
+                <Link
+                  to={to}
+                  onClick={() => setOpen(false)}
+                  className="font-serif text-white/80 hover:text-white transition-colors duration-300"
+                  style={{ fontSize: 'clamp(36px, 10vw, 56px)', fontWeight: 300, letterSpacing: '-0.02em' }}
+                >
+                  {label}
+                </Link>
+              </motion.div>
+            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, duration: 0.4, ease: EASE }}
+            >
+              <button
+                onClick={() => { setOpen(false); openTelegram() }}
+                className="label-caps text-white/45 hover:text-[#C9A96E] flex items-center gap-2 transition-colors duration-300"
+              >
+                Написать <ArrowUpRight size={11} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
@@ -120,7 +194,7 @@ export default function App() {
           <Nav />
 
           {/* ── SECTION 1: HERO ─────────────────────────────── */}
-          <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-10 md:px-20 text-center">
+          <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 md:px-20 text-center">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -135,7 +209,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7, ease: EASE }}
               className="heading-xl text-white"
-              style={{ fontSize: 'clamp(48px, 8.5vw, 116px)' }}
+              style={{ fontSize: 'clamp(36px, 8.5vw, 116px)' }}
             >
               Воплощаем любые
               <br />
@@ -158,7 +232,7 @@ export default function App() {
           {/* ── SECTION 2: INPUT ─────────────────────────────── */}
           <section
             id="input-section"
-            className="relative z-10 min-h-screen flex flex-col items-center justify-center px-10 md:px-20"
+            className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 md:px-20"
           >
             <motion.div
               initial={{ opacity: 0, y: 40 }}
