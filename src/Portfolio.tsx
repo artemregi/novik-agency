@@ -96,7 +96,7 @@ export default function Portfolio() {
 
         <Nav />
 
-        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-10 md:px-14 lg:px-20 py-28">
+        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center safe-pad py-28">
 
           <div className="w-full max-w-2xl">
             {/* Heading */}

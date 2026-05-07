@@ -42,7 +42,7 @@ export function Nav() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-14 lg:px-20 py-6 transition-all duration-500"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between safe-pad py-6 transition-all duration-500"
         style={{
           backdropFilter: scrolled || open ? 'blur(20px)' : 'none',
           background: scrolled || open ? 'rgba(5,5,5,0.82)' : 'transparent',
@@ -194,7 +194,7 @@ export default function App() {
           <Nav />
 
           {/* ── SECTION 1: HERO ─────────────────────────────── */}
-          <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-10 md:px-14 lg:px-20 text-center">
+          <section className="relative z-10 min-h-screen flex flex-col items-center justify-center safe-pad text-center">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -232,7 +232,7 @@ export default function App() {
           {/* ── SECTION 2: INPUT ─────────────────────────────── */}
           <section
             id="input-section"
-            className="relative z-10 min-h-screen flex flex-col items-center justify-center px-10 md:px-14 lg:px-20 py-24"
+            className="relative z-10 min-h-screen flex flex-col items-center justify-center safe-pad py-24"
           >
             <motion.div
               initial={{ opacity: 0, y: 40 }}
