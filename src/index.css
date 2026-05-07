@@ -118,20 +118,27 @@ textarea {
 .page-wrap { will-change: transform, opacity; }
 
 /* ─── Mobile safe padding ────────────────────────── */
+/* Generous desktop padding — let the content breathe */
 .safe-pad {
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: clamp(28px, 10vw, 160px);
+  padding-right: clamp(28px, 10vw, 160px);
+}
+@media (max-width: 1280px) {
+  .safe-pad {
+    padding-left: clamp(28px, 8vw, 120px);
+    padding-right: clamp(28px, 8vw, 120px);
+  }
 }
 @media (max-width: 1023px) {
   .safe-pad {
-    padding-left: 56px;
-    padding-right: 56px;
+    padding-left: 64px;
+    padding-right: 64px;
   }
 }
 @media (max-width: 767px) {
   .safe-pad {
-    padding-left: 44px !important;
-    padding-right: 44px !important;
+    padding-left: 28px !important;
+    padding-right: 28px !important;
   }
 }
 
@@ -139,3 +146,46 @@ textarea {
 ::-webkit-scrollbar { width: 2px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+
+/* ─── Liquid Glass Button ────────────────────────── */
+.btn-glass {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  /* Top inner highlight — key liquid glass signature */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
+  cursor: pointer;
+}
+
+.btn-glass:hover {
+  background: rgba(201, 169, 110, 0.11);
+  border-color: rgba(201, 169, 110, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(201, 169, 110, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 4px 28px rgba(201, 169, 110, 0.15);
+}
+
+.btn-glass:disabled {
+  opacity: 0.22;
+  cursor: not-allowed;
+}
+
+/* Subtle shimmer layer on top */
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  border-radius: 9999px 9999px 0 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  pointer-events: none;
+}

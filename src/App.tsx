@@ -30,7 +30,6 @@ export function Nav() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  // lock body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -42,7 +41,7 @@ export function Nav() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between safe-pad py-6 transition-all duration-500"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between safe-pad py-8 transition-all duration-500"
         style={{
           backdropFilter: scrolled || open ? 'blur(20px)' : 'none',
           background: scrolled || open ? 'rgba(5,5,5,0.82)' : 'transparent',
@@ -57,7 +56,7 @@ export function Nav() {
         </Link>
 
         {/* Desktop center links */}
-        <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-10">
+        <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-12">
           {[{ to: '/portfolio', label: 'Портфолио' }, { to: '/price', label: 'Цены' }].map(({ to, label }) => (
             <Link key={to} to={to} className="nav-link label-caps text-white/50 hover:text-white transition-colors duration-300">
               {label}
@@ -65,10 +64,11 @@ export function Nav() {
           ))}
         </div>
 
-        {/* Desktop CTA */}
+        {/* Desktop CTA — liquid glass */}
         <button
           onClick={() => openTelegram()}
-          className="hidden md:flex group label-caps text-white/65 hover:text-white items-center gap-2 transition-colors duration-300"
+          className="btn-glass hidden md:flex items-center gap-2 label-caps text-white/80 hover:text-white"
+          style={{ padding: '10px 22px' }}
         >
           <span className="relative overflow-hidden inline-flex" style={{ height: '1em' }}>
             <span className="transition-transform duration-300 group-hover:-translate-y-full inline-block leading-none">Написать</span>
@@ -100,7 +100,7 @@ export function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-14 md:hidden"
             style={{ background: 'rgba(5,5,5,0.97)', backdropFilter: 'blur(20px)' }}
           >
             {[{ to: '/portfolio', label: 'Портфолио' }, { to: '/price', label: 'Цены' }].map(({ to, label }, i) => (
@@ -127,7 +127,8 @@ export function Nav() {
             >
               <button
                 onClick={() => { setOpen(false); openTelegram() }}
-                className="label-caps text-white/45 hover:text-[#C9A96E] flex items-center gap-2 transition-colors duration-300"
+                className="btn-glass label-caps text-white/80 hover:text-[#C9A96E] flex items-center gap-2"
+                style={{ padding: '12px 28px' }}
               >
                 Написать <ArrowUpRight size={11} />
               </button>
@@ -185,7 +186,6 @@ export default function App() {
       <PageWrap>
         <main className="relative w-full min-h-screen font-sans selection:bg-white/15 selection:text-white overflow-x-hidden">
 
-          {/* Video — full screen, stays fixed while content scrolls */}
           <video
             src={VIDEO_SRC} autoPlay muted loop playsInline
             className="fixed inset-0 w-full h-full object-cover z-0"
@@ -200,7 +200,7 @@ export default function App() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-              className="label-caps text-white/30 mb-8"
+              className="label-caps text-white/30 mb-12"
             >
               Веб-агентство
             </motion.p>
@@ -210,7 +210,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7, ease: EASE }}
               className="heading-xl text-white"
-              style={{ fontSize: 'clamp(38px, 7vw, 110px)' }}
+              style={{ fontSize: 'clamp(40px, 7.5vw, 120px)' }}
             >
               Воплощаем любые
               <br />
@@ -224,7 +224,7 @@ export default function App() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2, ease: EASE }}
               onClick={() => document.getElementById('input-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="absolute bottom-14 label-caps text-white/28 hover:text-[#C9A96E] transition-colors duration-300"
+              className="absolute bottom-16 label-caps text-white/28 hover:text-[#C9A96E] transition-colors duration-300"
             >
               ↓ &nbsp; Напишите свою идею
             </motion.button>
@@ -233,55 +233,50 @@ export default function App() {
           {/* ── SECTION 2: INPUT ─────────────────────────────── */}
           <section
             id="input-section"
-            className="relative z-10 min-h-screen flex flex-col items-center justify-center safe-pad py-24"
+            className="relative z-10 min-h-screen flex flex-col items-center justify-center safe-pad py-36"
           >
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.9, ease: EASE }}
-              className="w-full max-w-lg"
+              className="w-full max-w-xl"
             >
               <AnimatePresence mode="wait">
                 {sent ? (
                   <motion.div key="sent"
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                    className="flex flex-col items-start gap-5 py-12"
+                    className="flex flex-col items-start gap-6 py-16"
                   >
-                    <CheckCircle2 size={32} className="text-[#C9A96E]/60" />
+                    <CheckCircle2 size={36} className="text-[#C9A96E]/60" />
                     <p className="font-serif text-white/75 text-3xl font-light">Открываем Telegram…</p>
                     <p className="label-caps text-white/25">Ваше сообщение уже ждёт там</p>
                   </motion.div>
                 ) : (
                   <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                    {/* Label */}
-                    <p className="label-caps text-white/55 mb-3">
+                    <p className="label-caps text-white/55 mb-6">
                       Расскажите о проекте
                     </p>
 
-                    {/* Textarea — line immediately under label */}
                     <textarea
                       value={message}
                       onChange={e => setMessage(e.target.value)}
                       onKeyDown={e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) handleSend() }}
-                      rows={4}
+                      rows={5}
                       placeholder="Я хочу сайт для своего барбершопа, чтобы он приводил клиентов и выделялся среди конкурентов…"
                       className="w-full bg-transparent text-white/75 placeholder:text-white/20 placeholder:italic
                         text-base md:text-lg font-light leading-relaxed
                         border-b border-white/15 focus:border-[#C9A96E]/40
-                        transition-colors duration-400 pb-5 mb-10"
+                        transition-colors duration-400 pb-6 mb-14"
                     />
 
-                    {/* Button row */}
                     <div className="flex items-center justify-between">
                       <span className="label-caps text-white/18">⌘ Enter</span>
                       <button
                         onClick={handleSend}
                         disabled={!message.trim()}
-                        className="group flex items-center gap-2 label-caps text-white/70 hover:text-white
-                          border border-white/22 hover:border-[#C9A96E]/50 rounded-full px-7 py-3
-                          disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
-                        style={{ backdropFilter: 'blur(10px)', background: 'rgba(255,255,255,0.05)' }}
+                        className="btn-glass group flex items-center gap-2.5 label-caps text-white/85 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed"
+                        style={{ padding: '12px 28px' }}
                       >
                         Связаться
                         <span className="relative w-3 h-3 overflow-hidden inline-flex items-center justify-center">
@@ -297,10 +292,11 @@ export default function App() {
           </section>
 
           {/* ── FOOTER ──────────────────────────────────────── */}
-          <footer className="relative z-10 pb-10 flex flex-col items-center gap-3">
+          <footer className="relative z-10 py-20 flex flex-col items-center gap-6">
             <button
               onClick={() => openTelegram()}
-              className="label-caps text-white/65 hover:text-[#C9A96E] transition-colors duration-300 flex items-center gap-1.5"
+              className="btn-glass label-caps text-white/85 hover:text-[#C9A96E] flex items-center gap-2"
+              style={{ padding: '12px 28px' }}
             >
               Связаться <ArrowUpRight size={10} />
             </button>
