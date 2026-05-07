@@ -81,7 +81,7 @@ body {
 /* ─── Typography helpers ─────────────────────────── */
 .font-serif   { font-family: var(--font-serif); }
 .heading-xl   { font-family: var(--font-serif); font-weight: 300; letter-spacing: -0.03em; line-height: 0.95; }
-.label-caps   { font-family: var(--font-sans); font-size: 10px; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; line-height: 1; }
+.label-caps   { font-family: var(--font-sans); font-size: 10px; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; line-height: 1; }
 
 /* ─── Nav underline animation ────────────────────── */
 .nav-link {
@@ -99,7 +99,6 @@ body {
   transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .nav-link:hover::after { transform: scaleX(1); }
-.nav-link.active::after { transform: scaleX(1); }
 
 /* ─── Gold accent line (price card) ─────────────── */
 .accent-line-gold {

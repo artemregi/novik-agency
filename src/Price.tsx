@@ -10,17 +10,12 @@ const PLANS = [
   {
     name: 'Лендинг', price: '25000', display: '25 000', unit: '₽', time: '3–5 дней',
     features: ['1 страница', 'Адаптивный дизайн', 'Анимации при скролле', 'Форма обратной связи', 'SEO-оптимизация'],
-    accentRgb: '160,160,160', featured: false, custom: false,
+    accentRgb: '160,160,160', featured: false,
   },
   {
     name: 'Сайт-визитка', price: '45000', display: '45 000', unit: '₽', time: '5–7 дней',
     features: ['До 5 страниц', 'Уникальный дизайн', 'Анимации & эффекты', 'Портфолио / каталог', 'SEO + скорость'],
-    accentRgb: '201,169,110', featured: true, custom: false,
-  },
-  {
-    name: 'Под заявку', price: '', display: '', unit: '₽', time: 'По запросу',
-    features: ['Без ограничений', 'Интернет-магазин / CMS', 'API-интеграции', 'Кастомный дизайн', 'Поддержка'],
-    accentRgb: '110,130,180', featured: false, custom: true,
+    accentRgb: '201,169,110', featured: true,
   },
 ]
 
@@ -82,7 +77,7 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
               </span>
             )}
           </div>
-          <ul className="flex flex-col gap-3.5">
+          <ul className="flex flex-col gap-2.5">
             {plan.features.map((f, fi) => (
               <motion.li key={f}
                 initial={{ opacity: 0, x: -8 }}
@@ -100,22 +95,15 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
         {/* Right */}
         <div className="flex flex-col sm:flex-col items-start sm:items-end gap-4 shrink-0 mt-4 sm:mt-0">
           <div className="text-left sm:text-right">
-            {plan.custom ? (
-              <p className="font-serif font-light text-white/65"
-                style={{ fontSize: 'clamp(16px, 2vw, 28px)', lineHeight: 1.2 }}>
-                По запросу
-              </p>
-            ) : (
-              <p className="font-serif font-light leading-none text-white"
-                style={{ fontSize: 'clamp(24px, 3.5vw, 52px)' }}>
-                <Counter value={plan.price} delay={i * 150} />
-                <span className="text-white/40 ml-1" style={{ fontSize: '0.55em', verticalAlign: 'super' }}>{plan.unit}</span>
-              </p>
-            )}
+            <p className="font-serif font-light leading-none text-white"
+              style={{ fontSize: 'clamp(24px, 3.5vw, 52px)' }}>
+              <Counter value={plan.price} delay={i * 150} />
+              <span className="text-white/30 ml-1 text-base">{plan.unit}</span>
+            </p>
             <p className="label-caps text-white/22 mt-1.5">{plan.time}</p>
           </div>
           <button
-            onClick={() => openTelegram(plan.custom ? 'Хочу обсудить индивидуальный проект.' : `Хочу заказать "${plan.name}".`)}
+            onClick={() => openTelegram(`Хочу заказать "${plan.name}".`)}
             className="label-caps flex items-center gap-1.5 rounded-full px-7 py-3"
             style={{
               color: hov ? (plan.featured ? GOLD : '#fff') : 'rgba(255,255,255,0.45)',
@@ -166,7 +154,7 @@ export default function Price() {
             </motion.div>
 
             {/* Cards */}
-            <div className="flex flex-col gap-10">
+            <div className="flex flex-col gap-6">
               {PLANS.map((p, i) => <PlanCard key={p.name} plan={p} i={i} />)}
             </div>
 
