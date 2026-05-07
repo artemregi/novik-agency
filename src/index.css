@@ -8,13 +8,20 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;        /* kill rubber-band bounce at page edges */
+  overscroll-behavior-y: none;
+}
 
 body {
   background: #050505;
   font-family: var(--font-sans);
   cursor: none;
   overflow-x: hidden;
+  overscroll-behavior: none;        /* prevent snap/bounce on mobile */
+  overscroll-behavior-y: none;
 }
 
 /* Hide cursor on touch/mobile */
@@ -270,11 +277,6 @@ div.fixed {
     will-change: transform;
     transform: translateZ(0);
   }
-}
-
-/* Smooth momentum scrolling on iOS */
-html {
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Prevent layout thrashing from scroll events */
