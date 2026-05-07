@@ -96,7 +96,7 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
         <div className="flex sm:flex-col items-center sm:items-end justify-between gap-5 shrink-0">
           <div className="text-right">
             <p className="font-serif font-light leading-none text-white"
-              style={{ fontSize: 'clamp(28px, 3.5vw, 52px)' }}>
+              style={{ fontSize: 'clamp(24px, 3.5vw, 52px)' }}>
               <Counter value={plan.price} delay={i * 150} />
               <span className="text-white/30 ml-1 text-base">{plan.unit}</span>
             </p>
@@ -133,7 +133,7 @@ export default function Price() {
 
         <Nav />
 
-        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-8 sm:px-14 md:px-20 py-28">
+        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 md:px-14 lg:px-20 py-28">
 
           <div className="w-full max-w-2xl">
             {/* Heading */}
@@ -145,7 +145,7 @@ export default function Price() {
             >
               <p className="label-caps text-white/35 mb-4">Прозрачно и честно</p>
               <h1 className="heading-xl text-white"
-                style={{ fontSize: 'clamp(48px, 6vw, 90px)' }}>
+                style={{ fontSize: 'clamp(40px, 6vw, 90px)' }}>
                 Цены
               </h1>
               <p className="text-white/32 text-sm font-light leading-relaxed mt-4">

@@ -62,7 +62,7 @@ function Card({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
       <div className="flex items-end justify-between gap-4">
         <h2 className="heading-xl transition-colors duration-300"
           style={{
-            fontSize: 'clamp(30px, 4.5vw, 54px)',
+            fontSize: 'clamp(26px, 4.5vw, 54px)',
             color: hov ? '#fff' : 'rgba(255,255,255,0.8)',
           }}>
           {p.name}
@@ -96,7 +96,7 @@ export default function Portfolio() {
 
         <Nav />
 
-        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-8 sm:px-14 md:px-20 py-28">
+        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 md:px-14 lg:px-20 py-28">
 
           <div className="w-full max-w-2xl">
             {/* Heading */}
@@ -108,7 +108,7 @@ export default function Portfolio() {
             >
               <p className="label-caps text-white/35 mb-4">Избранные работы</p>
               <h1 className="heading-xl text-white"
-                style={{ fontSize: 'clamp(48px, 6vw, 90px)' }}>
+                style={{ fontSize: 'clamp(40px, 6vw, 90px)' }}>
                 Портфолио
               </h1>
             </motion.div>

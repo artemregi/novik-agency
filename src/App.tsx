@@ -42,7 +42,7 @@ export function Nav() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-16 py-6 transition-all duration-500"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-14 lg:px-20 py-6 transition-all duration-500"
         style={{
           backdropFilter: scrolled || open ? 'blur(20px)' : 'none',
           background: scrolled || open ? 'rgba(5,5,5,0.82)' : 'transparent',
@@ -70,9 +70,9 @@ export function Nav() {
           onClick={() => openTelegram()}
           className="hidden md:flex group label-caps text-white/65 hover:text-white items-center gap-2 transition-colors duration-300"
         >
-          <span className="relative overflow-hidden inline-flex h-[1em]">
-            <span className="transition-transform duration-300 group-hover:-translate-y-full inline-block">Написать</span>
-            <span className="absolute top-full left-0 transition-transform duration-300 group-hover:-translate-y-full inline-block">Написать</span>
+          <span className="relative overflow-hidden inline-flex" style={{ height: '1em' }}>
+            <span className="transition-transform duration-300 group-hover:-translate-y-full inline-block leading-none">Написать</span>
+            <span className="absolute top-full left-0 transition-transform duration-300 group-hover:-translate-y-full inline-block leading-none">Написать</span>
           </span>
           <ArrowUpRight size={11} />
         </button>
@@ -194,7 +194,7 @@ export default function App() {
           <Nav />
 
           {/* ── SECTION 1: HERO ─────────────────────────────── */}
-          <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 md:px-20 text-center">
+          <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 md:px-14 lg:px-20 text-center">
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -209,7 +209,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7, ease: EASE }}
               className="heading-xl text-white"
-              style={{ fontSize: 'clamp(36px, 8.5vw, 116px)' }}
+              style={{ fontSize: 'clamp(38px, 7vw, 110px)' }}
             >
               Воплощаем любые
               <br />
@@ -232,7 +232,7 @@ export default function App() {
           {/* ── SECTION 2: INPUT ─────────────────────────────── */}
           <section
             id="input-section"
-            className="relative z-10 min-h-screen flex flex-col items-center justify-center px-8 sm:px-16 md:px-20 py-24"
+            className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 md:px-14 lg:px-20 py-24"
           >
             <motion.div
               initial={{ opacity: 0, y: 40 }}
