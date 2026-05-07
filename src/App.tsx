@@ -232,14 +232,14 @@ export default function App() {
           {/* ── SECTION 2: INPUT ─────────────────────────────── */}
           <section
             id="input-section"
-            className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 md:px-20 py-24"
+            className="relative z-10 min-h-screen flex flex-col items-center justify-center px-8 sm:px-16 md:px-20 py-24"
           >
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.9, ease: EASE }}
-              className="w-full max-w-lg px-1"
+              className="w-full max-w-lg"
             >
               <AnimatePresence mode="wait">
                 {sent ? (

@@ -62,7 +62,7 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
         ...(plan.featured ? { borderLeft: `1px solid ${GOLD}` } : {}),
       }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-7 p-5 md:p-9">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-7 p-6 md:p-9">
 
         {/* Left */}
         <div className="flex-1">
@@ -133,9 +133,9 @@ export default function Price() {
 
         <Nav />
 
-        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-5 md:px-16 py-28">
+        <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-8 sm:px-14 md:px-20 py-28">
 
-          <div className="w-full max-w-2xl px-2">
+          <div className="w-full max-w-2xl">
             {/* Heading */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
