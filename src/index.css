@@ -24,9 +24,12 @@ body {
   overscroll-behavior-y: none;
 }
 
-/* Hide cursor on touch/mobile */
+/* Hide native cursor everywhere on desktop */
+* { cursor: none !important; }
+
+/* Restore cursor on touch/mobile */
 @media (max-width: 768px) {
-  body { cursor: auto; }
+  * { cursor: auto !important; }
   .custom-cursor { display: none !important; }
 }
 
@@ -233,53 +236,7 @@ textarea {
   );
 }
 
-/* ─── Mobile scroll performance ─────────────────── */
-
-/* Force GPU layer on fixed backgrounds — eliminates repaint jank */
-video.fixed,
-img.fixed,
-div.fixed {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* On mobile: strip backdrop-filter entirely (too expensive)
-   Replace with solid semi-transparent fallback                */
-@media (max-width: 767px) {
-  .btn-glass {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(40, 40, 40, 0.75) !important;
-    border-color: rgba(255, 255, 255, 0.16) !important;
-  }
-  .btn-glass::before {
-    display: none;
-  }
-  .liquid-glass {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: rgba(30, 30, 30, 0.70) !important;
-  }
-  /* Cards on Portfolio / Price */
-  [style*="backdrop-filter: blur"] {
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
-  }
-  /* Nav blur — keep but reduce cost */
-  nav {
-    -webkit-backdrop-filter: blur(8px) !important;
-    backdrop-filter: blur(8px) !important;
-  }
-  /* Marquee — use GPU layer */
-  .marquee-track {
-    will-change: transform;
-    transform: translateZ(0);
-  }
-}
-
-/* Prevent layout thrashing from scroll events */
+/* ─── Tap highlight ─────────────────────────────── */
 * {
   -webkit-tap-highlight-color: transparent;
 }
