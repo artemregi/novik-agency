@@ -62,7 +62,7 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
         ...(plan.featured ? { borderLeft: `1px solid ${GOLD}` } : {}),
       }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-7 p-6 md:p-9">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-7 p-8 md:p-10">
 
         {/* Left */}
         <div className="flex-1">
@@ -93,8 +93,8 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
         </div>
 
         {/* Right */}
-        <div className="flex sm:flex-col items-center sm:items-end justify-between gap-5 shrink-0">
-          <div className="text-right">
+        <div className="flex flex-col sm:flex-col items-start sm:items-end gap-4 shrink-0 mt-4 sm:mt-0">
+          <div className="text-left sm:text-right">
             <p className="font-serif font-light leading-none text-white"
               style={{ fontSize: 'clamp(24px, 3.5vw, 52px)' }}>
               <Counter value={plan.price} delay={i * 150} />
@@ -104,7 +104,7 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
           </div>
           <button
             onClick={() => openTelegram(`Хочу заказать "${plan.name}".`)}
-            className="label-caps flex items-center gap-1.5 rounded-full px-5 py-2.5"
+            className="label-caps flex items-center gap-1.5 rounded-full px-7 py-3"
             style={{
               color: hov ? (plan.featured ? GOLD : '#fff') : 'rgba(255,255,255,0.45)',
               border: `1px solid ${hov ? `rgba(${plan.accentRgb},0.4)` : 'rgba(255,255,255,0.12)'}`,
@@ -141,20 +141,20 @@ export default function Price() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: EASE }}
-              className="mb-12 text-center"
+              className="mb-16 text-center"
             >
-              <p className="label-caps text-white/35 mb-4">Прозрачно и честно</p>
+              <p className="label-caps text-white/35 mb-6">Прозрачно и честно</p>
               <h1 className="heading-xl text-white"
                 style={{ fontSize: 'clamp(40px, 6vw, 90px)' }}>
                 Цены
               </h1>
-              <p className="text-white/32 text-sm font-light leading-relaxed mt-4">
+              <p className="text-white/32 text-sm font-light leading-relaxed mt-6">
                 Один клиент — и сайт уже окупился. Без скрытых платежей.
               </p>
             </motion.div>
 
             {/* Cards */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               {PLANS.map((p, i) => <PlanCard key={p.name} plan={p} i={i} />)}
             </div>
 
@@ -163,7 +163,7 @@ export default function Price() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.6, ease: EASE }}
-              className="mt-10 flex justify-center"
+              className="mt-16 flex justify-center"
             >
               <button
                 onClick={() => openTelegram('Хочу узнать стоимость под мой проект.')}

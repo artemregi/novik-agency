@@ -162,6 +162,7 @@ export default function App() {
 
   useEffect(() => {
     if (!ready) return
+    if (window.matchMedia('(max-width: 767px)').matches) return
     const lenis = new Lenis({ duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) })
     lenisRef.current = lenis
     const raf = (t: number) => { lenis.raf(t); requestAnimationFrame(raf) }
@@ -299,7 +300,7 @@ export default function App() {
           <footer className="relative z-10 pb-10 flex flex-col items-center gap-3">
             <button
               onClick={() => openTelegram()}
-              className="label-caps text-white/35 hover:text-[#C9A96E] transition-colors duration-300 flex items-center gap-1.5"
+              className="label-caps text-white/65 hover:text-[#C9A96E] transition-colors duration-300 flex items-center gap-1.5"
             >
               Связаться <ArrowUpRight size={10} />
             </button>

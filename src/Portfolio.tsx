@@ -36,7 +36,7 @@ function Card({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
       transition={{ duration: 0.7, delay: 0.2 + i * 0.12, ease: EASE }}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
-      className="block rounded-2xl p-6 md:p-9"
+      className="block rounded-2xl p-8 md:p-10"
       style={{
         background: hov ? `rgba(${p.accentRgb},0.07)` : 'rgba(255,255,255,0.03)',
         border: `1px solid ${hov ? `rgba(${p.accentRgb},0.25)` : 'rgba(255,255,255,0.07)'}`,
@@ -46,7 +46,7 @@ function Card({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
       }}
     >
       {/* Tag + year */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center mb-8">
         <span className="label-caps px-3 py-1.5 rounded-full border"
           style={{
             color: hov ? p.accent : 'rgba(255,255,255,0.32)',
@@ -55,7 +55,6 @@ function Card({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
           }}>
           {p.tag}
         </span>
-        <span className="label-caps text-white/18">{p.year}</span>
       </div>
 
       {/* Name + arrow */}
@@ -114,7 +113,7 @@ export default function Portfolio() {
             </motion.div>
 
             {/* Cards */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6">
               {PROJECTS.map((p, i) => <Card key={p.url} p={p} i={i} />)}
             </div>
 
@@ -123,7 +122,7 @@ export default function Portfolio() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.6, ease: EASE }}
-              className="mt-10 flex justify-center"
+              className="mt-16 flex justify-center"
             >
               <button
                 onClick={() => openTelegram('Хочу заказать сайт.')}
