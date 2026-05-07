@@ -18,48 +18,9 @@ html {
 body {
   background: #050505;
   font-family: var(--font-sans);
-  cursor: none;
   overflow-x: hidden;
-  overscroll-behavior: none;        /* prevent snap/bounce on mobile */
+  overscroll-behavior: none;
   overscroll-behavior-y: none;
-}
-
-/* Hide native cursor everywhere on desktop */
-* { cursor: none !important; }
-
-/* Restore cursor on touch/mobile */
-@media (max-width: 768px) {
-  * { cursor: auto !important; }
-  .custom-cursor { display: none !important; }
-}
-
-/* ─── Custom cursor ──────────────────────────────── */
-.custom-cursor {
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  mix-blend-mode: difference;
-}
-.cursor-dot {
-  position: absolute;
-  width: 6px; height: 6px;
-  background: #fff;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width .2s, height .2s, opacity .2s;
-}
-.cursor-ring {
-  position: absolute;
-  width: 32px; height: 32px;
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width .3s, height .3s, border-color .3s;
-}
-.cursor-ring.hovering {
-  width: 52px; height: 52px;
-  border-color: #C9A96E;
 }
 
 /* ─── Liquid Glass ───────────────────────────────── */

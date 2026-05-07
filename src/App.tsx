@@ -4,7 +4,6 @@ import { ArrowUpRight, CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Lenis from 'lenis'
 import Preloader from './components/Preloader'
-import CustomCursor from './components/CustomCursor'
 import './index.css'
 
 const VIDEO_SRC =
@@ -210,7 +209,6 @@ export default function App() {
   return (
     <>
       <Preloader onDone={() => setReady(true)} />
-      {ready && <CustomCursor />}
 
       <PageWrap>
         <main className="relative w-full min-h-screen font-sans selection:bg-white/15 selection:text-white overflow-x-hidden">
@@ -218,10 +216,8 @@ export default function App() {
           <video
             src={VIDEO_SRC} autoPlay muted loop playsInline
             className="fixed inset-0 w-full h-full object-cover z-0"
-            style={{ willChange: 'transform', transform: 'translateZ(0)' }}
           />
-          <div className="fixed inset-0 z-[1] bg-black/55"
-            style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+          <div className="fixed inset-0 z-[1] bg-black/55" />
 
           <Nav />
 
