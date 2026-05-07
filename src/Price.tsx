@@ -127,7 +127,7 @@ export default function Price() {
 
         <div className="fixed inset-0 z-0 bg-black flex items-center justify-center">
           <img src="/bg-portfolio.png" alt=""
-            className="w-full h-full object-contain select-none pointer-events-none" />
+            className="w-full h-full object-cover select-none pointer-events-none" />
         </div>
         <div className="fixed inset-0 z-[1] bg-black/48" />
 
