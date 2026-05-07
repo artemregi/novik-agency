@@ -154,6 +154,35 @@ export function PageWrap({ children }: { children: React.ReactNode }) {
   )
 }
 
+/* ── Ticker ──────────────────────────────────────── */
+const TICKER_ITEMS = [
+  'Индивидуальный дизайн под ваш бизнес',
+  'Анализ конкурентов в каждом проекте',
+  'SEO + Яндекс.Метрика в комплекте',
+  'Прозрачные цены — от 25 000 ₽',
+  'Сдача в срок — гарантировано',
+  'Правки до результата',
+  'Без шаблонов — каждый проект уникален',
+  'Первый созвон бесплатно',
+]
+
+function Ticker() {
+  const items = [...TICKER_ITEMS, ...TICKER_ITEMS] // duplicate for seamless loop
+  return (
+    <div className="marquee-wrap w-full">
+      <div className="marquee-track">
+        {items.map((item, i) => (
+          <span key={i} className="inline-flex items-center gap-5 label-caps text-white/28"
+            style={{ paddingRight: 'clamp(28px, 4vw, 52px)', fontSize: '9px', letterSpacing: '0.28em', whiteSpace: 'nowrap' }}>
+            {item}
+            <span style={{ color: 'rgba(201,169,110,0.35)', fontSize: 10 }}>✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 /* ── App ─────────────────────────────────────────────────── */
 export default function App() {
   const [ready, setReady]     = useState(false)
@@ -219,15 +248,27 @@ export default function App() {
               в сайт.
             </motion.h1>
 
+            {/* Scroll hint */}
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2, ease: EASE }}
               onClick={() => document.getElementById('input-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className="absolute bottom-16 label-caps text-white/28 hover:text-[#C9A96E] transition-colors duration-300"
+              className="absolute bottom-24 label-caps text-white/28 hover:text-[#C9A96E] transition-colors duration-300"
             >
               ↓ &nbsp; Напишите свою идею
             </motion.button>
+
+            {/* Ticker — pinned to bottom of hero */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.5, ease: EASE }}
+              className="absolute bottom-0 left-0 right-0 py-5"
+              style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+            >
+              <Ticker />
+            </motion.div>
           </section>
 
           {/* ── SECTION 2: INPUT ─────────────────────────────── */}
@@ -267,16 +308,35 @@ export default function App() {
                       className="w-full bg-transparent text-white/75 placeholder:text-white/20 placeholder:italic
                         text-base md:text-lg font-light leading-relaxed
                         border-b border-white/15 focus:border-[#C9A96E]/40
-                        transition-colors duration-400 pb-6 mb-14"
+                        transition-colors duration-400 pb-6 mb-10"
                     />
 
+                    {/* Send row */}
                     <div className="flex items-center justify-between">
                       <span className="label-caps text-white/18">⌘ Enter</span>
                       <button
                         onClick={handleSend}
                         disabled={!message.trim()}
-                        className="btn-glass group flex items-center gap-2.5 label-caps text-white/85 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed"
-                        style={{ padding: '12px 28px' }}
+                        className="group flex items-center gap-2.5 label-caps disabled:cursor-not-allowed"
+                        style={{
+                          padding: '13px 30px',
+                          borderRadius: 9999,
+                          backdropFilter: 'blur(20px)',
+                          WebkitBackdropFilter: 'blur(20px)',
+                          transition: 'all 0.4s ease',
+                          background: message.trim()
+                            ? 'rgba(201,169,110,0.12)'
+                            : 'rgba(255,255,255,0.06)',
+                          border: message.trim()
+                            ? '1px solid rgba(201,169,110,0.45)'
+                            : '1px solid rgba(255,255,255,0.14)',
+                          boxShadow: message.trim()
+                            ? 'inset 0 1px 0 rgba(201,169,110,0.3), 0 4px 24px rgba(201,169,110,0.1)'
+                            : 'inset 0 1px 0 rgba(255,255,255,0.18), 0 4px 16px rgba(0,0,0,0.2)',
+                          color: message.trim()
+                            ? '#C9A96E'
+                            : 'rgba(255,255,255,0.55)',
+                        }}
                       >
                         Связаться
                         <span className="relative w-3 h-3 overflow-hidden inline-flex items-center justify-center">
@@ -292,14 +352,7 @@ export default function App() {
           </section>
 
           {/* ── FOOTER ──────────────────────────────────────── */}
-          <footer className="relative z-10 py-20 flex flex-col items-center gap-6">
-            <button
-              onClick={() => openTelegram()}
-              className="btn-glass label-caps text-white/85 hover:text-[#C9A96E] flex items-center gap-2"
-              style={{ padding: '12px 28px' }}
-            >
-              Связаться <ArrowUpRight size={10} />
-            </button>
+          <footer className="relative z-10 pb-14 pt-4 flex flex-col items-center">
             <p className="label-caps text-white/15">© 2025 Novik_agency</p>
           </footer>
 
