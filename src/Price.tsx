@@ -68,8 +68,8 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
   const [hov, setHov] = useState(false)
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.7, delay: 0.2 + i * 0.12, ease: EASE }}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
@@ -146,8 +146,8 @@ function PlanCard({ plan, i }: { plan: typeof PLANS[0]; i: number }) {
 function GuaranteesStrip() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
       className="grid grid-cols-1 sm:grid-cols-3"
       style={{
@@ -209,8 +209,8 @@ function ProcessPanel() {
         {STEPS.map((s, i) => (
           <motion.div
             key={s.n}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.55, delay: 0.55 + i * 0.09, ease: EASE }}
             style={{ display: 'flex', gap: 'clamp(14px, 1.8vw, 20px)', alignItems: 'flex-start' }}
           >
@@ -296,8 +296,8 @@ export default function Price() {
               <div>
                 {/* Heading */}
                 <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.9, ease: EASE }}
                   style={{
                     paddingTop: 'clamp(140px, 16vw, 220px)',

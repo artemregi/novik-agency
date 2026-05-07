@@ -38,8 +38,8 @@ export function Nav() {
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between safe-pad py-8 transition-all duration-500"
         style={{
@@ -106,8 +106,8 @@ export function Nav() {
             {[{ to: '/portfolio', label: 'Портфолио' }, { to: '/price', label: 'Цены' }].map(({ to, label }, i) => (
               <motion.div
                 key={to}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: i * 0.08, duration: 0.4, ease: EASE }}
               >
                 <Link
@@ -121,8 +121,8 @@ export function Nav() {
               </motion.div>
             ))}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 0.18, duration: 0.4, ease: EASE }}
             >
               <button
@@ -144,9 +144,9 @@ export function Nav() {
 export function PageWrap({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -18 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.55, ease: EASE }}
     >
       {children}
@@ -228,8 +228,8 @@ export default function App() {
           {/* ── SECTION 1: HERO ─────────────────────────────── */}
           <section className="relative z-10 min-h-screen flex flex-col items-center justify-center safe-pad text-center">
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
               className="label-caps text-white/30 mb-12"
             >
@@ -237,8 +237,8 @@ export default function App() {
             </motion.p>
 
             <motion.h1
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.7, ease: EASE }}
               className="heading-xl text-white"
               style={{ fontSize: 'clamp(40px, 7.5vw, 120px)' }}
@@ -279,8 +279,8 @@ export default function App() {
             className="relative z-10 min-h-screen flex flex-col items-center justify-center safe-pad py-36"
           >
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.9, ease: EASE }}
               className="w-full max-w-xl"

@@ -31,8 +31,8 @@ function Card({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
   return (
     <motion.a
       href={p.url} target="_blank" rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.7, delay: 0.2 + i * 0.12, ease: EASE }}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
@@ -142,8 +142,8 @@ function ManifestoPanel() {
         {items.map((item, i) => (
           <motion.div
             key={item.label}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 + i * 0.1, ease: EASE }}
           >
             <p className="label-caps text-white/40" style={{ marginBottom: 10, letterSpacing: '0.22em' }}>
@@ -200,8 +200,8 @@ export default function Portfolio() {
               {/* ── LEFT: heading + cards ── */}
               <div>
                 <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.9, ease: EASE }}
                   style={{
                     paddingTop: 'clamp(140px, 16vw, 220px)',
