@@ -275,14 +275,11 @@ export default function Price() {
     <PageWrap>
       <main className="relative w-full font-sans selection:bg-white/15 selection:text-white overflow-x-hidden">
 
-        <div className="fixed inset-0 z-0 bg-black"
-          style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
+        <div className="fixed inset-0 z-0 bg-black">
           <img src="/bg-portfolio.png" alt=""
-            className="w-full h-full object-cover select-none pointer-events-none opacity-60"
-            style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+            className="w-full h-full object-cover select-none pointer-events-none opacity-60" />
         </div>
-        <div className="fixed inset-0 z-[1] bg-black/40"
-          style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
+        <div className="fixed inset-0 z-[1] bg-black/40" />
 
         <Nav />
 
