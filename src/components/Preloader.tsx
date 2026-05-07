@@ -27,8 +27,8 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
       {visible && (
         <motion.div
           key="preloader"
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.55, ease: 'easeInOut' }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
           className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#050505]"
         >
           {/* Logo */}

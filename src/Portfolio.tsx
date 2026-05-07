@@ -40,7 +40,7 @@ function Card({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
       style={{
         background: hov ? `rgba(${p.accentRgb},0.07)` : 'rgba(255,255,255,0.03)',
         border: `1px solid ${hov ? `rgba(${p.accentRgb},0.25)` : 'rgba(255,255,255,0.07)'}`,
-        transform: hov ? 'translateY(-4px)' : 'translateY(0)',
+        transform: hov ? 'translateY(-4px) scale(1.01)' : 'translateY(0) scale(1)',
         backdropFilter: 'blur(12px)',
         transition: 'all 0.4s cubic-bezier(0.25,0.46,0.45,0.94)',
       }}
@@ -70,7 +70,7 @@ function Card({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
           style={{
             borderColor: hov ? p.accent : 'rgba(255,255,255,0.12)',
             color: hov ? p.accent : 'rgba(255,255,255,0.3)',
-            transform: hov ? 'rotate(45deg)' : 'rotate(0)',
+            transform: hov ? 'rotate(45deg) scale(1.1)' : 'rotate(0) scale(1)',
             transition: 'all 0.3s ease',
           }}>
           <ArrowUpRight size={16} />
@@ -103,7 +103,7 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: EASE }}
-              className="mb-12 text-center"
+              className="mb-16 text-center"
             >
               <p className="label-caps text-white/35 mb-4">Избранные работы</p>
               <h1 className="heading-xl text-white"
@@ -113,7 +113,7 @@ export default function Portfolio() {
             </motion.div>
 
             {/* Cards */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-8">
               {PROJECTS.map((p, i) => <Card key={p.url} p={p} i={i} />)}
             </div>
 

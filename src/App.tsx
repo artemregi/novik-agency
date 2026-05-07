@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Lenis from 'lenis'
 import Preloader from './components/Preloader'
 import CustomCursor from './components/CustomCursor'
@@ -59,9 +59,11 @@ export function Nav() {
         {/* Desktop center links */}
         <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-10">
           {[{ to: '/portfolio', label: 'Портфолио' }, { to: '/price', label: 'Цены' }].map(({ to, label }) => (
-            <Link key={to} to={to} className="nav-link label-caps text-white/50 hover:text-white transition-colors duration-300">
+            <NavLink key={to} to={to} className={({ isActive }) =>
+              `nav-link label-caps transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/50 hover:text-white'}`
+            }>
               {label}
-            </Link>
+            </NavLink>
           ))}
         </div>
 
@@ -74,7 +76,7 @@ export function Nav() {
             <span className="transition-transform duration-300 group-hover:-translate-y-full inline-block leading-none">Написать</span>
             <span className="absolute top-full left-0 transition-transform duration-300 group-hover:-translate-y-full inline-block leading-none">Написать</span>
           </span>
-          <ArrowUpRight size={11} />
+          <ArrowUpRight size={11} className="transition-transform duration-300 group-hover:rotate-45 group-hover:translate-x-px group-hover:-translate-y-px" />
         </button>
 
         {/* Mobile burger */}
@@ -108,7 +110,7 @@ export function Nav() {
                 key={to}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08, duration: 0.4, ease: EASE }}
+                transition={{ delay: 0.08 + i * 0.12, duration: 0.45, ease: EASE }}
               >
                 <Link
                   to={to}
@@ -123,7 +125,7 @@ export function Nav() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.4, ease: EASE }}
+              transition={{ delay: 0.32, duration: 0.45, ease: EASE }}
             >
               <button
                 onClick={() => { setOpen(false); openTelegram() }}
@@ -158,7 +160,9 @@ export default function App() {
   const [ready, setReady]     = useState(false)
   const [message, setMessage] = useState('')
   const [sent, setSent]       = useState(false)
+  const [placeholder, setPlaceholder] = useState('')
   const lenisRef = useRef<Lenis | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     if (!ready) return
@@ -169,6 +173,32 @@ export default function App() {
     requestAnimationFrame(raf)
     return () => lenis.destroy()
   }, [ready])
+
+  useEffect(() => {
+    let intervalId: ReturnType<typeof setInterval>
+    const timerId = setTimeout(() => {
+      const FULL = 'Я хочу сайт для своего барбершопа, чтобы он приводил клиентов и выделялся среди конкурентов…'
+      let i = 0
+      intervalId = setInterval(() => {
+        i++
+        setPlaceholder(FULL.slice(0, i))
+        if (i >= FULL.length) clearInterval(intervalId)
+      }, 38)
+    }, 2400)
+    return () => { clearTimeout(timerId); clearInterval(intervalId) }
+  }, [])
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (videoRef.current) {
+        const y = window.scrollY * 0.07
+        videoRef.current.style.transform = `translateY(${y}px) scale(1.08)`
+      }
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const handleSend = () => {
     if (!message.trim()) return
@@ -187,8 +217,10 @@ export default function App() {
 
           {/* Video — full screen, stays fixed while content scrolls */}
           <video
+            ref={videoRef}
             src={VIDEO_SRC} autoPlay muted loop playsInline
             className="fixed inset-0 w-full h-full object-cover z-0"
+            style={{ transformOrigin: 'center center', willChange: 'transform', transform: 'scale(1.08)' }}
           />
           <div className="fixed inset-0 z-[1] bg-black/55" />
 
@@ -214,7 +246,15 @@ export default function App() {
             >
               Воплощаем любые
               <br />
-              <em className="not-italic text-white/28">ваши фантазии</em>
+              <motion.em
+                className="not-italic"
+                style={{ color: 'rgba(255,255,255,0.38)' }}
+                initial={{ filter: 'blur(12px)', opacity: 0 }}
+                animate={{ filter: 'blur(0px)', opacity: 1 }}
+                transition={{ duration: 1.5, delay: 1.1, ease: EASE }}
+              >
+                ваши фантазии
+              </motion.em>
               <br />
               в сайт.
             </motion.h1>
@@ -255,7 +295,7 @@ export default function App() {
                 ) : (
                   <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                     {/* Label */}
-                    <p className="label-caps text-white/55 mb-3">
+                    <p className="label-caps text-white/55 mb-5">
                       Расскажите о проекте
                     </p>
 
@@ -265,7 +305,7 @@ export default function App() {
                       onChange={e => setMessage(e.target.value)}
                       onKeyDown={e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) handleSend() }}
                       rows={4}
-                      placeholder="Я хочу сайт для своего барбершопа, чтобы он приводил клиентов и выделялся среди конкурентов…"
+                      placeholder={placeholder}
                       className="w-full bg-transparent text-white/75 placeholder:text-white/20 placeholder:italic
                         text-base md:text-lg font-light leading-relaxed
                         border-b border-white/15 focus:border-[#C9A96E]/40
@@ -297,14 +337,15 @@ export default function App() {
           </section>
 
           {/* ── FOOTER ──────────────────────────────────────── */}
-          <footer className="relative z-10 pb-10 flex flex-col items-center gap-3">
+          <footer className="relative z-10 pb-10 flex flex-col items-center gap-4">
+            <div className="w-14 h-px bg-white/12 mb-1" />
             <button
               onClick={() => openTelegram()}
               className="label-caps text-white/65 hover:text-[#C9A96E] transition-colors duration-300 flex items-center gap-1.5"
             >
               Связаться <ArrowUpRight size={10} />
             </button>
-            <p className="label-caps text-white/15">© 2025 Novik_agency</p>
+            <p className="label-caps text-white/28">© 2025 Novik_agency</p>
           </footer>
 
         </main>
