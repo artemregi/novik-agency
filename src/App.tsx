@@ -218,8 +218,10 @@ export default function App() {
           <video
             src={VIDEO_SRC} autoPlay muted loop playsInline
             className="fixed inset-0 w-full h-full object-cover z-0"
+            style={{ willChange: 'transform', transform: 'translateZ(0)' }}
           />
-          <div className="fixed inset-0 z-[1] bg-black/55" />
+          <div className="fixed inset-0 z-[1] bg-black/55"
+            style={{ willChange: 'transform', transform: 'translateZ(0)' }} />
 
           <Nav />
 
